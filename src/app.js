@@ -24,14 +24,38 @@ app.get("/products", async (req, res) => {
   }
 });
 
+app.post("/products", async (req, res) => {
+  const obj = req.body;
+  const newProduct = await productManager.addProducts(obj);
+  res.json({ message: "Product created", product: newProduct });
+});
+
 app.get("/products/:pid", async (req, res) => {
-  const productId = parseInt(req.params.pid);
-  const product = await productManager.getProductById(productId);
+  const { pid } = req.params;
+  const product = await productManager.getProductById(+pid);
   if (product.length == 0) {
-    res.send("Product not existent");
+    res.json({ message: "Product not existent" });
   } else {
     res.json(product);
   }
+});
+
+app.delete("/products", async (req, res) => {
+  const response = await productManager.deleteProducts();
+  res.json({ response });
+});
+
+app.delete("/products/:pid", async (req, res) => {
+  const { pid } = req.params;
+  const products = await productManager.deleteProductsById(+pid);
+  res.json({ products });
+});
+
+app.put("/products/:pid", async (req, res) => {
+  const { pid } = req.params;
+  const obj = req.body;
+  const product = await productManager.updateProduct(+pid, obj);
+  res.json({ product });
 });
 
 app.listen(port, () => console.log(`Listen port ${port}`));

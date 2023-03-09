@@ -26,7 +26,7 @@ class ProductManager {
   };
 
   addProducts = async (product) => {
-    const productsInFileAsk = await this.getProduct();
+    const productsInFileAsk = await this.getProducts();
     const id = this.#generateID(productsInFileAsk);
     const newProducts = { id, ...product };
     productsInFileAsk.push(newProducts);
@@ -35,31 +35,38 @@ class ProductManager {
   };
 
   updateProduct = async (id, obj) => {
-    const products = await this.askProductExists();
-    const indexProduct = products.findIndex((elem) => elem.id === id);
-    if (indexProduct == -1) {
-      return "Product not found";
+    const productsFile = await this.getProducts();
+    const product = productsFile.find((p) => p.id === id);
+    if (!product) {
+      return "Product doesn't exist";
     } else {
-      const actualProduct = { ...products[indexProduct], ...obj };
-      products.splice(indexProduct, 1, actualProduct);
-      await fs.promises.writeFile(this.path, JSON.stringify(products));
+      const updateProduct = { ...product, ...obj };
+      const productIndex = productsFile.findIndex((p) => p.id === id);
+      productsFile.splice(productIndex, 1, updateProduct);
+      await fs.promises.writeFile(this.path, JSON.stringify(productsFile));
+      return "Product updated";
     }
   };
 
   deleteProducts = async () => {
     if (fs.existsSync(this.path)) {
       await fs.promises.unlink(this.path);
-      return console.log("Delete products");
+      return "Delete products";
     } else {
       return "Non-existent file";
     }
   };
 
   deleteProductsById = async (id) => {
-    const products = await this.askProductExists();
-    const arrayNewProducts = products.filter((user) => user.id !== id);
-    await fs.promises.writeFile(this.path, JSON.stringify(arrayNewProducts));
-    return arrayNewProducts;
+    const products = await this.getProducts();
+    const productIndex = products.findIndex((p) => p.id === id);
+    if (productIndex === -1) {
+      return "Product doesn't exist";
+    } else {
+      products.splice(productIndex, 1);
+      await fs.promises.writeFile(this.path, JSON.stringify(products));
+      return "Product deleted";
+    }
   };
 
   #generateID = (product) => {
