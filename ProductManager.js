@@ -158,17 +158,17 @@ const product10 = {
 
 const productManager = new ProductManager("products.json");
 
-const run = async () => {
-  //   await productManager.addProducts(product1);
-  //   await productManager.addProducts(product2);
-  //   await productManager.addProducts(product3);
-  //   await productManager.addProducts(product4);
-  //   await productManager.addProducts(product5);
-  //   await productManager.addProducts(product6);
-  //   await productManager.addProducts(product7);
-  //   await productManager.addProducts(product8);
-  //   await productManager.addProducts(product9);
-  //   await productManager.addProducts(product10);
-};
+//const run = async () => {
+//   await productManager.addProducts(product1);
+//   await productManager.addProducts(product2);
+//   await productManager.addProducts(product3);
+//   await productManager.addProducts(product4);
+//   await productManager.addProducts(product5);
+//   await productManager.addProducts(product6);
+//   await productManager.addProducts(product7);
+//   await productManager.addProducts(product8);
+//   await productManager.addProducts(product9);
+//   await productManager.addProducts(product10);
+//};
 
 //run();
