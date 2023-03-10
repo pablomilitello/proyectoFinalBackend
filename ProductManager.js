@@ -85,97 +85,99 @@ export default ProductManager;
 const product1 = {
   title: "jeans",
   description: "blue jeans medium",
+  category: "summer",
   price: 30,
-  thumbnail: true,
+  thumbnail: [],
   code: "ABC0001",
   stock: 10,
+  status: true,
 };
 const product2 = {
   title: "shirt",
   description: "white shirt medium",
+  category: "summer",
   price: 20,
-  thumbnail: true,
+  thumbnail: [],
   code: "ABC0002",
   stock: 7,
+  status: true,
 };
 const product3 = {
   title: "shoes",
   description: "black shoes 41",
+  category: "summer",
   price: 22,
-  thumbnail: true,
+  thumbnail: [],
   code: "ABC0003",
   stock: 15,
+  status: true,
 };
 const product4 = {
   title: "boots",
   description: "white boots",
+  category: "winter",
   price: 23,
-  thumbnail: true,
+  thumbnail: [],
   code: "ABC0004",
   stock: 10,
+  status: true,
 };
 const product5 = {
   title: "belt",
   description: "red belt 1m",
+  category: "summer",
   price: 7,
-  thumbnail: true,
+  thumbnail: [],
   code: "ABC0005",
   stock: 5,
+  status: true,
 };
 const product6 = {
   title: "dress",
   description: "pink beautifull dress",
+  category: "summer",
   price: 12,
-  thumbnail: true,
+  thumbnail: [],
   code: "ABC0006",
   stock: 3,
+  status: true,
 };
 const product7 = {
   title: "jacket",
   description: "black and white jacket",
+  category: "summer",
   price: 25,
-  thumbnail: true,
+  thumbnail: [],
   code: "ABC0007",
   stock: 7,
+  status: true,
 };
 const product8 = {
   title: "hat",
   description: "sun hat brown",
+  category: "winter",
   price: 6,
-  thumbnail: true,
+  thumbnail: [],
   code: "ABC0008",
   stock: 12,
+  status: true,
 };
 const product9 = {
-  title: "socks",
-  description: "large socks",
+  title: "gloves",
+  description: "large gloves",
+  category: "winter",
   price: 3,
-  thumbnail: true,
+  thumbnail: [],
   code: "ABC0009",
   stock: 20,
+  status: true,
 };
 const product10 = {
   title: "gloves",
   description: "medium black gloves",
   price: 7,
-  thumbnail: true,
+  thumbnail: [],
   code: "ABC00010",
   stock: 15,
+  status: true,
 };
-
-const productManager = new ProductManager("products.json");
-
-//const run = async () => {
-//   await productManager.addProducts(product1);
-//   await productManager.addProducts(product2);
-//   await productManager.addProducts(product3);
-//   await productManager.addProducts(product4);
-//   await productManager.addProducts(product5);
-//   await productManager.addProducts(product6);
-//   await productManager.addProducts(product7);
-//   await productManager.addProducts(product8);
-//   await productManager.addProducts(product9);
-//   await productManager.addProducts(product10);
-//};
-
-//run();
