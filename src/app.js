@@ -2,9 +2,9 @@ import ProductManager from "../ProductManager.js";
 import express from "express";
 import productsRouter from "./routes/products.router.js";
 import usersRouter from "./routes/users.router.js";
+import { __dirname } from "./utils.js";
 
 const path = "./products.json";
-
 const port = 8080;
 const app = express();
 
@@ -12,6 +12,11 @@ const productManager = new ProductManager(path);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use("/static", express.static(__dirname + "/public"));
+
+app.use("/api/products", productsRouter);
+app.use("/api/users", usersRouter);
 
 app.get("/products", async (req, res) => {
   const question = req.query;

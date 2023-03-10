@@ -2,6 +2,10 @@ import { Router } from "express";
 
 const router = Router();
 
-router.get();
+const products = [];
+
+router.get("/", (req, res) => {
+  res.json({ products });
+});
 
 export default router;
