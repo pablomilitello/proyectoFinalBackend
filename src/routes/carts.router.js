@@ -8,6 +8,11 @@ const cartManager = new CartManager(path);
 
 const products = [1, 2, 3];
 
+router.post("/", async (req, res) => {
+  const newCart = await cartManager.addCarts();
+  res.json({ message: "Cart created", cart: newCart });
+});
+
 router.get("/", async (req, res) => {
   const { limit } = req.query;
   const carts = await cartManager.getCarts();
@@ -30,18 +35,10 @@ router.get("/:cid", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  const obj = req.body;
-  const newCart = await cartManager.addCarts(obj);
-  res.json({ message: "Cart created", cart: newCart });
-});
-
 router.post("/:cid/product/:pid", async (req, res) => {
   const { cid, pid } = req.params;
-  const q = req.body;
-  const products = [+pid, q];
-  const newCart = await cartManager.addProductsToCart(+cid, products);
-  res.json({ message: "Cart created", cart: newCart });
+  const newCart = await cartManager.addProductsToCart(+cid, +pid);
+  res.json({ message: "Products in cart", cart: newCart });
 });
 
 router.delete("/", async (req, res) => {

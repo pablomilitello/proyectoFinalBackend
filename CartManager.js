@@ -25,21 +25,39 @@ class CartManager {
     }
   };
 
-  addCarts = async (cart) => {
+  addCarts = async () => {
     const cartsInFileAsk = await this.getCarts();
     const id = this.#generateID(cartsInFileAsk);
-    const newCarts = { id, ...cart };
+    const newCarts = { id: id, products: [] };
     cartsInFileAsk.push(newCarts);
     await fs.promises.writeFile(this.path, JSON.stringify(cartsInFileAsk));
     return newCarts;
   };
 
-  addProductsToCart = async (cid, products) => {
+  addProductsToCart = async (cid, pid) => {
     const cartsInFileAsk = await this.getCarts();
     const cart = cartsInFileAsk.find((c) => c.id === cid);
-    // cart = { cid, ...products };
-    // cartsInFileAsk.push(cart);
-    // await fs.promises.writeFile(this.path, JSON.stringify(cartsInFileAsk));
+    let q = 1;
+    const obj = { product: pid, quantity: q };
+
+    if (cart.products.length === 0) {
+      cart.products = obj;
+      const updateCart = cart;
+      //console.log(cart);
+      cartsInFileAsk.splice(0, 1, updateCart);
+      console.log(cartsInFileAsk);
+      await fs.promises.writeFile(this.path, JSON.stringify(cartsInFileAsk));
+      return "Product addred";
+    }
+    if (cart.products.product === pid) {
+      cart.products.quantity += 1;
+      const updateCart = cart;
+      cartsInFileAsk.splice(0, 1, updateCart);
+      await fs.promises.writeFile(this.path, JSON.stringify(cartsInFileAsk));
+      return "Product addred";
+    } else {
+      //falta agregar que pasa si es un producto nuevo
+    }
   };
 
   deleteCarts = async () => {
